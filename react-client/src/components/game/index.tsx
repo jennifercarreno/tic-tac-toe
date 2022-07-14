@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import gamecontext from "../../gamecontext";
+import gameService from "../../services/gameService";
+import socketService from "../../services/socketService";
 
 
 const GameContainer = styled.div`
@@ -85,8 +87,23 @@ export function Game() {
             setMatrix(newMatrix);
 
         }
+        if (socketService.socket)
+            gameService.updateGame(socketService.socket, newMatrix);
+
         
+        
+    };
+
+    const handleGameUpdate = () => {
+        if(socketService.socket)
+            gameService.onGameUpdate(socketService.socket, (newMatrix) => {
+                setMatrix(newMatrix);
+            })
     }
+
+    useEffect(() => {
+        handleGameUpdate();
+    }, []);
 
     return <GameContainer>
         {matrix.map((row, rowIdx) => {
