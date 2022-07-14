@@ -16,6 +16,10 @@ function App() {
 
   const connect = () => {
     const socket = io("http://localhost:9000");
+
+    socket.on("connect", () => {
+      socket.emit("custom_event", {name: "Jennifer", age: 19});
+    })
   }
 
   useEffect(() => {
