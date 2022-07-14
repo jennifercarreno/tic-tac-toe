@@ -2,7 +2,7 @@ import { SocketController, OnConnect, ConnectedSocket, SocketIO } from "socket-c
 import { Server, Socket } from "socket.io";
 
 @SocketController()
-class MainController {
+export class MainController {
     @OnConnect()
     public onConnection(
         @ConnectedSocket() socket: Socket, 
