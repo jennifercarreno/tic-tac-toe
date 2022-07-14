@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import './App.css';
 import io from "socket.io-client";
+import socketService from "./services/socketService";
+import { JoinRoom } from "./components/joinRoom";
 const AppContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -12,24 +14,38 @@ const AppContainer = styled.div`
   padding: 1em;
 `;
 
+const WelcomeText = styled.h1`
+  margin: 0;
+  color: #8e44ad;
+`;
+
+const MainContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function App() {
 
-  const connect = () => {
-    const socket = io("http://localhost:9000");
-
-    socket.on("connect", () => {
-      socket.emit("custom_event", {name: "Jennifer", age: 19});
+  const connectSocket = async () => {
+    const socket = socketService.connect("http://localhost:9000").catch((err) => {
+      console.log("Error: ", err);
     })
   }
 
   useEffect(() => {
-    connect();
+    connectSocket();
   }, []);
 
 
   return (
     <AppContainer>
-      <h1>Welcome to Tic-Tac-Toe</h1>
+      <WelcomeText>Welcome to Tic-Tac-Toe</WelcomeText>
+      <MainContainer>
+        <JoinRoom></JoinRoom>
+      </MainContainer>
     </AppContainer>
   );
 }
