@@ -11,9 +11,9 @@ export class RoomController {
         const room_array = Array.from(socket.rooms.values());
         const socketRooms = room_array.filter((r) => r !== socket.id);
 
-        if (socketRooms.length > 0 || connectedSockets && connectedSockets.size === 2) {
+        if (socketRooms.length > 0 || (connectedSockets && connectedSockets.size === 2)) {
             socket.emit("room_join_error", {
-                error: "Room is full"
+                error: "Room is full",
             });
             
         } else {
