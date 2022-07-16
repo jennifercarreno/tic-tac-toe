@@ -1,13 +1,8 @@
-import { join } from "path/posix";
-import React, { useContext, useState, useSyncExternalStore } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import gamecontext from "../../gamecontext";
+import gameContext from "../../gamecontext";
 import gameService from "../../services/gameService";
 import socketService from "../../services/socketService";
-
-interface IJoinRoomProps{}
-
-
 
 interface IJoinRoomProps {}
 
@@ -53,29 +48,31 @@ export function JoinRoom(props: IJoinRoomProps) {
 
     const [roomName, setRoomName] = useState("");
     const [isJoining, setJoining] = useState(false);
-    const { setInRoom, isInRoom } = useContext(gamecontext);
+    const { setInRoom, isInRoom } = useContext(gameContext);
+    
     const handleRoomNameChange = (e: React.ChangeEvent<any>) => {
-        const value = e.target.value;
-        setRoomName(value);
-    }
-
+      const value = e.target.value;
+      setRoomName(value);
+    };
+  
     const joinRoom = async (e: React.FormEvent) => {
       e.preventDefault();
+  
       const socket = socketService.socket;
-      if(!roomName || roomName.trim() == "" || !socket) return;
-
+      if (!roomName || roomName.trim() === "" || !socket) return;
+  
       setJoining(true);
-
+  
       const joined = await gameService
-      .joinGameRoom(socket, roomName)
-      .catch((err) => {
-        alert(err);
-      });
-
-    if (joined) setInRoom(true);
-
-    setJoining(false);
-  };
+        .joinGameRoom(socket, roomName)
+        .catch((err) => {
+          alert(err);
+        });
+  
+      if (joined) setInRoom(true);
+  
+      setJoining(false);
+    };
 
     return ( 
         <form onSubmit={joinRoom}> 
