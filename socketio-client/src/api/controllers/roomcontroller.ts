@@ -29,9 +29,7 @@ export class RoomController {
             if(io.sockets.adapter.rooms.get(message.roomId).size === 2) {
                 console.log("two players in room")
                 socket.emit("start_game", { start: true, symbol: "x" });
-                socket
-                .to(message.roomId)
-                .emit("start_game", { start: false, symbol: "o" });
+                socket.to(message.roomId).emit("start_game", { start: false, symbol: "o" });
                 
             
                     }

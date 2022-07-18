@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 
 const WelcomeText = styled.h1`
   margin: 0;
-  color: #8e44ad;
+  color: #eb0790;
 `;
 
 const MainContainer = styled.div`

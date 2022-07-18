@@ -6,6 +6,7 @@ class SocketService {
 
   public connect(
     url: string
+    
   ): Promise<Socket<DefaultEventsMap, DefaultEventsMap>> {
     return new Promise((rs, rj) => {
       this.socket = io(url);

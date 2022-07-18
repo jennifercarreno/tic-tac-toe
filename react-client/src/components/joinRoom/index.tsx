@@ -21,14 +21,14 @@ const RoomIdInput = styled.input`
   width: 20em;
   font-size: 17px;
   outline: none;
-  border: 1px solid #8e44ad;
+  border: 1px solid #eb0790;
   border-radius: 3px;
   padding: 0 10px;
 `;
 
 const JoinButton = styled.button`
   outline: none;
-  background-color: #8e44ad;
+  background-color: #eb0790;
   color: #fff;
   font-size: 17px;
   border: 2px solid transparent;
@@ -39,8 +39,8 @@ const JoinButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: transparent;
-    border: 2px solid #8e44ad;
-    color: #8e44ad;
+    border: 2px solid #eb0790;
+    color: #eb0790;
   }
 `;
 
